@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat de Voz y Video</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="omtv-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <strong>Ome-style Video Chat</strong>
+      </div>
+      <p class="tagline">Meet strangers instantly</p>
+    </header>
+
+    <section class="stage">
+      <video id="remoteVideo" class="remote-video" autoplay playsinline></video>
+      <div class="remote-overlay"></div>
+
+      <article class="status-card">
+        <p class="status-label">Status</p>
+        <p id="status" class="status">Preparando conexion...</p>
+        <div class="room-row">
+          <span>Room:</span>
+          <strong id="activeRoomId">-</strong>
+          <button id="copyBtn" class="btn tiny" type="button" disabled>Copy ID</button>
+        </div>
+      </article>
+
+      <article class="side-panel">
+        <section class="meta-strip">
+          <div class="meta-item">
+            <span>Online</span>
+            <strong id="onlineNow">0</strong>
+          </div>
+          <div class="meta-item">
+            <span>Call Time</span>
+            <strong id="callTimer">00:00</strong>
+          </div>
+        </section>
+
+        <section class="filters-box">
+          <p class="meters-title">Preferences</p>
+          <label for="selfGender">Tu genero</label>
+          <select id="selfGender">
+            <option value="unknown" selected>Prefer not to say</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+
+          <label for="targetGender">Buscar</label>
+          <select id="targetGender">
+            <option value="all" selected>Everyone</option>
+            <option value="male">Male only</option>
+            <option value="female">Female only</option>
+          </select>
+        </section>
+
+        <div class="control-row primary-flow">
+          <button id="matchBtn" class="btn primary" type="button">Start</button>
+          <button id="nextBtn" class="btn" type="button" disabled>Next</button>
+        </div>
+
+        <div class="control-row">
+          <button id="hangupBtn" class="btn danger" type="button" disabled>Stop</button>
+          <button id="muteBtn" class="btn tiny" type="button" disabled>Mute</button>
+          <button id="cameraBtn" class="btn tiny" type="button" disabled>Camera Off</button>
+        </div>
+
+        <div class="control-row">
+          <button id="reportBtn" class="btn tiny" type="button" disabled>Report</button>
+          <button id="blockBtn" class="btn tiny" type="button" disabled>Block</button>
+        </div>
+
+        <details class="manual-box">
+          <summary>Manual mode</summary>
+          <div class="manual-body">
+            <div class="control-row">
+              <button id="createBtn" class="btn" type="button">Create Room</button>
+              <button id="joinBtn" class="btn" type="button">Join</button>
+            </div>
+            <label for="roomIdInput">Room ID</label>
+            <input id="roomIdInput" type="text" maxlength="80" placeholder="Example: room-1234">
+          </div>
+        </details>
+
+        <section class="audio-meters">
+          <p class="meters-title">Audio Levels</p>
+          <div class="meter-wrap">
+            <span>Local</span>
+            <div class="meter"><div id="localLevel" class="fill"></div></div>
+          </div>
+          <div class="meter-wrap">
+            <span>Remoto</span>
+            <div class="meter"><div id="remoteLevel" class="fill alt"></div></div>
+          </div>
+        </section>
+
+        <section class="chat-box">
+          <p class="meters-title">Text Chat</p>
+          <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+          <form id="chatForm" class="chat-form">
+            <input id="chatInput" type="text" maxlength="240" placeholder="Type a message..." autocomplete="off">
+            <button class="btn tiny" type="submit">Send</button>
+          </form>
+        </section>
+      </article>
+
+      <article class="local-pip-wrap">
+        <p>You</p>
+        <video id="localVideo" class="local-video" autoplay playsinline muted></video>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
